@@ -224,6 +224,17 @@ input.invalid:focus {
   font-size: 1.05rem;
 }
 
+/* Дневная норма воды */
+.result__water {
+  margin: 10px 0 0;
+  color: var(--text-muted);
+}
+
+.result__water strong {
+  color: var(--maintain);
+  font-size: 1.05rem;
+}
+
 /* Выделенная рекомендация по выбранной цели */
 .result__target {
   margin: 14px 0 0;
