@@ -13,9 +13,28 @@ const goalLabel = document.getElementById('goal-label');
 const goalTargetValue = document.getElementById('goal-target-value');
 const waterValue = document.getElementById('water-value');
 const waterMlValue = document.getElementById('water-ml');
+const bmiValue = document.getElementById('bmi-value');
+const bmiCategory = document.getElementById('bmi-category');
+const bmiHint = document.getElementById('bmi-hint');
 
 // Норма воды: 30 мл на 1 кг массы тела
 const WATER_PER_KG = 30;
+
+// Категории ИМТ по классификации ВОЗ.
+// max — верхняя граница диапазона (не включительно); key — для цвета в CSS.
+const BMI_CATEGORIES = [
+  { max: 18.5, key: 'low', label: 'Недостаточный вес', hint: 'Вес ниже нормы — стоит немного его набрать.' },
+  { max: 25, key: 'normal', label: 'Норма', hint: 'Отличный показатель — так держать!' },
+  { max: 30, key: 'high', label: 'Избыточный вес', hint: 'Вес выше нормы — желательно его немного снизить.' },
+  { max: Infinity, key: 'obese', label: 'Ожирение', hint: 'Рекомендуется консультация специалиста.' },
+];
+
+/**
+ * Возвращает категорию ИМТ (label, hint, key) по числовому значению.
+ */
+function getBmiCategory(bmi) {
+  return BMI_CATEGORIES.find((category) => bmi < category.max);
+}
 
 // Человекочитаемые названия целей
 const GOAL_LABELS = {
@@ -111,6 +130,19 @@ form.addEventListener('submit', (event) => {
   // Калории для выбранной цели
   const targetByGoal = { loss, maintain: tdee, gain };
   const target = targetByGoal[goal];
+
+  // Индекс массы тела: вес(кг) / рост(м)^2
+  const heightM = height / 100;
+  const bmi = weight / (heightM * heightM);
+  const category = getBmiCategory(bmi);
+
+  bmiValue.textContent = bmi.toLocaleString('ru-RU', {
+    minimumFractionDigits: 1,
+    maximumFractionDigits: 1,
+  });
+  bmiCategory.textContent = `— ${category.label}`;
+  bmiCategory.className = `bmi-category bmi-category--${category.key}`;
+  bmiHint.textContent = category.hint;
 
   // Выводим результаты
   bmrValue.textContent = round(bmr).toLocaleString('ru-RU');

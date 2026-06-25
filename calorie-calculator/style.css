@@ -224,6 +224,34 @@ input.invalid:focus {
   font-size: 1.05rem;
 }
 
+/* Индекс массы тела (ИМТ) */
+.result__bmi {
+  margin: 0 0 4px;
+  color: var(--text-muted);
+}
+
+.result__bmi strong {
+  color: var(--text);
+  font-size: 1.15rem;
+}
+
+/* Категория ИМТ словами — цвет зависит от диапазона */
+.bmi-category {
+  font-weight: 600;
+}
+
+.bmi-category--low { color: var(--maintain); }
+.bmi-category--normal { color: var(--loss); }
+.bmi-category--high { color: var(--gain); }
+.bmi-category--obese { color: var(--error); }
+
+/* Короткая подсказка под ИМТ */
+.result__bmi-hint {
+  margin: 0 0 12px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
 /* Дневная норма воды */
 .result__water {
   margin: 10px 0 0;
