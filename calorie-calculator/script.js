@@ -9,6 +9,15 @@ const tdeeValue = document.getElementById('tdee-value');
 const goalLoss = document.getElementById('goal-loss');
 const goalMaintain = document.getElementById('goal-maintain');
 const goalGain = document.getElementById('goal-gain');
+const goalLabel = document.getElementById('goal-label');
+const goalTargetValue = document.getElementById('goal-target-value');
+
+// Человекочитаемые названия целей
+const GOAL_LABELS = {
+  loss: 'Похудение',
+  maintain: 'Поддержание веса',
+  gain: 'Набор массы',
+};
 
 // Правила валидации для числовых полей: допустимый диапазон и название
 const FIELD_RULES = {
@@ -84,6 +93,7 @@ form.addEventListener('submit', (event) => {
 
   const gender = form.elements.gender.value;
   const activity = Number(form.elements.activity.value);
+  const goal = form.elements.goal.value;
 
   // BMR и TDEE
   const bmr = calculateBMR({ gender, weight, height, age });
@@ -93,12 +103,25 @@ form.addEventListener('submit', (event) => {
   const loss = tdee * 0.8; // похудение −20%
   const gain = tdee * 1.15; // набор массы +15%
 
+  // Калории для выбранной цели
+  const targetByGoal = { loss, maintain: tdee, gain };
+  const target = targetByGoal[goal];
+
   // Выводим результаты
   bmrValue.textContent = round(bmr).toLocaleString('ru-RU');
   tdeeValue.textContent = round(tdee).toLocaleString('ru-RU');
   goalLoss.textContent = round(loss).toLocaleString('ru-RU');
   goalMaintain.textContent = round(tdee).toLocaleString('ru-RU');
   goalGain.textContent = round(gain).toLocaleString('ru-RU');
+
+  // Рекомендация по выбранной цели
+  goalLabel.textContent = GOAL_LABELS[goal];
+  goalTargetValue.textContent = round(target).toLocaleString('ru-RU');
+
+  // Подсвечиваем карточку выбранной цели
+  document.querySelectorAll('.goal').forEach((card) => {
+    card.classList.toggle('goal--active', card.dataset.goal === goal);
+  });
 
   result.hidden = false;
   result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });

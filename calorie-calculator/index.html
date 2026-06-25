@@ -62,6 +62,16 @@
         </select>
       </div>
 
+      <!-- Цель -->
+      <div class="field">
+        <label for="goal">Цель</label>
+        <select id="goal" name="goal">
+          <option value="loss">Похудение (−20%)</option>
+          <option value="maintain" selected>Поддержание веса</option>
+          <option value="gain">Набор массы (+15%)</option>
+        </select>
+      </div>
+
       <div class="actions">
         <button type="submit" class="btn btn--primary">Рассчитать</button>
         <button type="reset" class="btn btn--ghost">Сбросить</button>
@@ -78,18 +88,24 @@
         Суточная норма (TDEE): <strong id="tdee-value">—</strong> ккал/сутки
       </p>
 
+      <!-- Рекомендация по выбранной цели -->
+      <p class="result__target">
+        Норма для цели «<span id="goal-label">—</span>»:
+        <strong id="goal-target-value">—</strong> ккал/сутки
+      </p>
+
       <div class="goals">
-        <div class="goal goal--loss">
+        <div class="goal goal--loss" data-goal="loss">
           <span class="goal__title">Похудение</span>
           <span class="goal__value" id="goal-loss">—</span>
           <span class="goal__note">−20% от нормы</span>
         </div>
-        <div class="goal goal--maintain">
+        <div class="goal goal--maintain" data-goal="maintain">
           <span class="goal__title">Поддержание</span>
           <span class="goal__value" id="goal-maintain">—</span>
           <span class="goal__note">текущий вес</span>
         </div>
-        <div class="goal goal--gain">
+        <div class="goal goal--gain" data-goal="gain">
           <span class="goal__title">Набор массы</span>
           <span class="goal__value" id="goal-gain">—</span>
           <span class="goal__note">+15% к норме</span>
