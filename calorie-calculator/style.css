@@ -245,6 +245,13 @@ input.invalid:focus {
 .bmi-category--high { color: var(--gain); }
 .bmi-category--obese { color: var(--error); }
 
+/* Подпись-пояснение с формулой ИМТ */
+.result__bmi-formula {
+  margin: 0 0 8px;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
 /* Короткая подсказка под ИМТ */
 .result__bmi-hint {
   margin: 0 0 12px;
