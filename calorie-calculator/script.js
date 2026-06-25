@@ -11,6 +11,11 @@ const goalMaintain = document.getElementById('goal-maintain');
 const goalGain = document.getElementById('goal-gain');
 const goalLabel = document.getElementById('goal-label');
 const goalTargetValue = document.getElementById('goal-target-value');
+const waterValue = document.getElementById('water-value');
+const waterMlValue = document.getElementById('water-ml');
+
+// Норма воды: 30 мл на 1 кг массы тела
+const WATER_PER_KG = 30;
 
 // Человекочитаемые названия целей
 const GOAL_LABELS = {
@@ -117,6 +122,15 @@ form.addEventListener('submit', (event) => {
   // Рекомендация по выбранной цели
   goalLabel.textContent = GOAL_LABELS[goal];
   goalTargetValue.textContent = round(target).toLocaleString('ru-RU');
+
+  // Дневная норма воды по весу
+  const waterMl = weight * WATER_PER_KG;
+  const waterLiters = waterMl / 1000;
+  waterMlValue.textContent = round(waterMl).toLocaleString('ru-RU');
+  waterValue.textContent = waterLiters.toLocaleString('ru-RU', {
+    minimumFractionDigits: 1,
+    maximumFractionDigits: 1,
+  });
 
   // Подсвечиваем карточку выбранной цели
   document.querySelectorAll('.goal').forEach((card) => {
