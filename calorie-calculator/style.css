@@ -224,6 +224,21 @@ input.invalid:focus {
   font-size: 1.05rem;
 }
 
+/* Выделенная рекомендация по выбранной цели */
+.result__target {
+  margin: 14px 0 0;
+  padding: 12px 14px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--primary);
+  border-radius: 10px;
+}
+
+.result__target strong {
+  color: var(--primary);
+  font-size: 1.1rem;
+}
+
 /* Карточки целей — адаптивная сетка */
 .goals {
   margin-top: 20px;
@@ -262,6 +277,12 @@ input.invalid:focus {
 .goal--loss .goal__value { color: var(--loss); }
 .goal--maintain .goal__value { color: var(--maintain); }
 .goal--gain .goal__value { color: var(--gain); }
+
+/* Подсветка выбранной цели */
+.goal--active {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px var(--primary) inset;
+}
 
 .footer {
   margin-top: 24px;
