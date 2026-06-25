@@ -1,0 +1,282 @@
+/* Переменные цветовой схемы (светлая тема по умолчанию) */
+:root {
+  --bg: #f4f6fb;
+  --surface: #ffffff;
+  --text: #1c2333;
+  --text-muted: #5b6478;
+  --border: #d8dee9;
+  --primary: #3b6cf6;
+  --primary-hover: #2f57cc;
+  --error: #d6336c;
+  --loss: #2b8a3e;
+  --maintain: #1971c2;
+  --gain: #e8590c;
+  --shadow: 0 8px 24px rgba(20, 30, 60, 0.08);
+}
+
+/* Тёмная тема — переключается автоматически по системным настройкам */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #11151f;
+    --surface: #1a2030;
+    --text: #e8ecf5;
+    --text-muted: #97a0b5;
+    --border: #2c3548;
+    --primary: #5b86ff;
+    --primary-hover: #7b9eff;
+    --error: #ff6b9d;
+    --loss: #51cf66;
+    --maintain: #4dabf7;
+    --gain: #ff922b;
+    --shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  padding: 24px 16px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+}
+
+/* Контейнер — адаптивная ширина */
+.container {
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.header h1 {
+  margin: 0 0 8px;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+}
+
+.subtitle {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+/* Форма */
+.form {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: var(--shadow);
+}
+
+.field {
+  margin: 0 0 18px;
+  border: none;
+  padding: 0;
+}
+
+.field label,
+.field legend {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+input[type="number"],
+select {
+  width: 100%;
+  padding: 11px 13px;
+  font-size: 1rem;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+input[type="number"]:focus,
+select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(59, 108, 246, 0.2);
+}
+
+/* Подсветка некорректного поля */
+input.invalid {
+  border-color: var(--error);
+}
+
+input.invalid:focus {
+  box-shadow: 0 0 0 3px rgba(214, 51, 108, 0.2);
+}
+
+/* Группа радиокнопок */
+.radio-group {
+  display: flex;
+  gap: 12px;
+}
+
+.radio {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 13px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.radio input {
+  accent-color: var(--primary);
+}
+
+/* Сообщение об ошибке */
+.error {
+  display: block;
+  margin-top: 5px;
+  min-height: 1em;
+  color: var(--error);
+  font-size: 0.82rem;
+}
+
+/* Кнопки */
+.actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.btn {
+  flex: 1;
+  padding: 12px 16px;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.05s;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn--primary {
+  background: var(--primary);
+  color: #fff;
+}
+
+.btn--primary:hover {
+  background: var(--primary-hover);
+}
+
+.btn--ghost {
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+
+.btn--ghost:hover {
+  color: var(--text);
+}
+
+/* Блок результатов */
+.result {
+  margin-top: 24px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: var(--shadow);
+  animation: fade-in 0.25s ease;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.result h2 {
+  margin: 0 0 16px;
+  font-size: 1.25rem;
+}
+
+.result__bmr,
+.result__tdee {
+  margin: 6px 0;
+  color: var(--text-muted);
+}
+
+.result__bmr strong,
+.result__tdee strong {
+  color: var(--text);
+  font-size: 1.05rem;
+}
+
+/* Карточки целей — адаптивная сетка */
+.goals {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.goal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 16px 10px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.goal__title {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.goal__value {
+  margin: 8px 0 4px;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.goal__note {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.goal--loss .goal__value { color: var(--loss); }
+.goal--maintain .goal__value { color: var(--maintain); }
+.goal--gain .goal__value { color: var(--gain); }
+
+.footer {
+  margin-top: 24px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+/* Адаптивность для узких экранов */
+@media (max-width: 480px) {
+  .goals {
+    grid-template-columns: 1fr;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+}
